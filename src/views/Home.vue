@@ -1,42 +1,19 @@
 <template>
-  <v-app id="inspire">
-   <!-- <v-system-bar app>
-      <v-spacer></v-spacer>
-
-      <v-icon>mdi-square</v-icon>
-
-      <v-icon>mdi-circle</v-icon>
-
-      <v-icon>mdi-triangle</v-icon>
-    </v-system-bar>-->
-
-    <v-navigation-drawer v-model="drawer" app dark>
-      <v-sheet color="light-green darken-4" class="pa-4">
-        <v-avatar class="mb-4" color="grey darken-1" size="74">
-          <img src="@/assets/logo.jpg" alt="John"
-        /></v-avatar>
-
-        <div>Jonathan Cañada</div>
-      </v-sheet>
-
-      <v-divider></v-divider>
-
-      <!-- <v-list>
-        <v-list-item v-for="[icon, text, tema] in links" :key="icon" link>
-          <v-list-item-icon>
-            <v-icon :color="tema">{{ icon }}</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>{{ text }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list> -->
-      <PxMenu />
-    </v-navigation-drawer>
-
+  <div>
     <v-main>
-      <v-container class="py-8 px-6" fluid>
+      <line-chart
+        :data="{ '2017-01-01': 11, '2017-01-02': 10, '2017-01-03': 1 }"
+        width="800px"
+        height="500px"
+        :colors="['#b00', '#666']"
+      ></line-chart>
+      <pie-chart
+        :data="[
+          ['Blueberry', 44],
+          ['Strawberry', 23]
+        ]"
+      ></pie-chart>
+      <!-- <v-container class="py-8 px-6" fluid>
         <v-row>
           <v-col v-for="card in cards" :key="card" cols="12">
             <v-card>
@@ -68,31 +45,30 @@
             </v-card>
           </v-col>
         </v-row>
-      </v-container>
+      </v-container>-->
     </v-main>
-  </v-app>
+  </div>
 </template>
 
 <script>
-import PxMenu from "@/components/PxMenu";
 export default {
   name: "home",
   // eslint-disable-next-line vue/no-unused-components
-  components: { PxMenu },
+  //components: { PxMenu },
   data: () => ({
     cards: ["Today", "Yesterday"],
     drawer: null,
     links: [
-      ["mdi-message-text", "Cotizacion","green darken-2"],
-      ["mdi-domain", "Inventario","blue darken-2"],
+      ["mdi-message-text", "Cotizacion", "green darken-2"],
+      ["mdi-domain", "Inventario", "blue darken-2"],
       [
         "mdi-newspaper-variant-multiple-outline",
         "Facturacion",
         "teal darken-2"
       ],
-      ["mdi-numeric", "Contabilidad","blue-grey darken-2"],
-      ["mdi-security", "Seguridad","orange darken-2"],
-      ["mdi-account", "Perfil","blue lighten-5"],
+      ["mdi-numeric", "Contabilidad", "blue-grey darken-2"],
+      ["mdi-security", "Seguridad", "orange darken-2"],
+      ["mdi-account", "Perfil", "blue lighten-5"],
       ["mdi-account-settings", "Configuracion", "blue-grey darken-2"]
     ]
   })

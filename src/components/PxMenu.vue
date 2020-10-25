@@ -6,9 +6,8 @@
       :prepend-icon="item.action"
       v-model="item.active"
       no-action
-      color ="light-blue lighten-3"
+      color="light-blue lighten-3"
     >
-    
       <template v-slot:activator>
         <v-list-item-content>
           <v-list-item-title v-text="item.title"></v-list-item-title>
@@ -32,7 +31,11 @@ export default {
       items: [
         {
           action: "mdi-message-text",
-          items: [{ title: "Mantenimientos" }, { title: "Procesos" }],
+          items: [
+            { title: "Mantenimientos" },
+            { title: "Procesos" },
+            { title: "Reportes" }
+          ],
           title: "Cotizacion",
           tema: "green darken-2"
         },
