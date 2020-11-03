@@ -69,7 +69,7 @@ export default {
             {
               title: "Mantenimientos",
               options: [
-               /* {
+                /* {
                   title: "Productos",
                   icon: "mdi-view-list-outline",
                   color: "yellow",
