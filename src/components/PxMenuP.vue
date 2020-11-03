@@ -88,7 +88,7 @@ export default {
           ],
           title: "Cotizacion",
           tema: "green darken-2",
-          active: true
+          active: false
         },
         {
           action: "mdi-domain",
