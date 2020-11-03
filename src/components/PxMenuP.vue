@@ -44,7 +44,11 @@
               <v-list-item-title v-text="grandchild.title"></v-list-item-title>
             </v-list-item-content>
             <v-list-item-icon>
-              <v-icon color="green">mdi-semantic-web</v-icon>
+              <router-link :to="{ name: 'Costos' }">
+                <v-icon :color="grandchild.color">
+                  {{ grandchild.icon }}</v-icon
+                ></router-link
+              >
             </v-list-item-icon>
           </v-list-item>
         </v-list-group>
@@ -64,7 +68,20 @@ export default {
           items: [
             {
               title: "Mantenimientos",
-              options: [{ title: "Productos" }, { title: "Costos" }]
+              options: [
+               /* {
+                  title: "Productos",
+                  icon: "mdi-view-list-outline",
+                  color: "yellow",
+                  link: "costos"
+                },*/
+                {
+                  title: "Costos",
+                  icon: "mdi-view-list-outline",
+                  color: "yellow",
+                  link: "home"
+                }
+              ]
             },
             { title: "Procesos", options: [{ title: "Calculo" }] },
             { title: "Reportes", options: [{ title: "Historial" }] }

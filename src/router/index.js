@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Error from "@/views/Error";
 import Mantenimiento from "@/views/Mantenimiento";
+import Costos from "@/views/Costos";
+
 
 
 Vue.use(VueRouter);
@@ -17,6 +19,11 @@ const routes = [
     path: "/Mantenimiento",
     name: "Mantenimiento",
     component: Mantenimiento
+  },
+  {
+    path: "/costos",
+    name: "Costos",
+    component: Costos
   },
   {
     path: "/about",

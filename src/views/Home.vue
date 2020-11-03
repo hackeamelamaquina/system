@@ -1,7 +1,13 @@
 <template>
   <div>
     <v-main>
-      <line-chart
+      <v-img
+        lazy-src="@/assets/LogoG.jpg"
+        max-height="950"
+        src="@/assets/LogoG.jpg"
+      ></v-img>
+
+      <!-- <line-chart
         :data="{ '2017-01-01': 11, '2017-01-02': 10, '2017-01-03': 1 }"
         width="800px"
         height="500px"
@@ -13,7 +19,7 @@
           ['Strawberry', 23]
         ]"
       ></pie-chart>
-      <!-- <v-container class="py-8 px-6" fluid>
+      <v-container class="py-8 px-6" fluid>
         <v-row>
           <v-col v-for="card in cards" :key="card" cols="12">
             <v-card>
