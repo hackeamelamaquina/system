@@ -2,7 +2,7 @@
   <v-main>
     <v-data-table
       :headers="headers"
-      :items="desserts"
+      :items="costos"
       sort-by="calories"
       class="elevation-1"
     >
@@ -89,6 +89,7 @@
 </template>
 
 <script>
+import api from "@/apis/api";
 export default {
   data: () => ({
     dialog: false,
@@ -103,11 +104,15 @@ export default {
       { text: "Precio", value: "precio" },
       { text: "Accion", value: "actions", sortable: false }
     ],
-    desserts: [],
+    costos: [],
+    msg: "",
+    formdata: [],
     editedIndex: -1,
     editedItem: {
       nombre: "",
-      precio: 0
+      precio: 0,
+      id: 0,
+      accion: 0
     },
     defaultItem: {
       name: "",
@@ -132,58 +137,43 @@ export default {
 
   created() {
     this.initialize();
+    this.GetCostos();
+  },
+  updated() {
+    this.GetCostos();
   },
 
   methods: {
     initialize() {
-      this.desserts = [
+      /* this.costos = [
         {
           nombre: "VINIL LAMINADO MATE",
-          precio: 3.05
+          precio: 3.05,
+          id: 0
           ///estado: true
-        },
-        {
-          nombre: "VINIL LAMINADO BRILLANTE",
-          precio: 2.95
-          // estado: true
-        },
-        {
-          nombre: "VINIL",
-          precio: 1.6
-          // estado: true
-        },
-        {
-          nombre: "BANNER 13 OZ",
-          precio: 1.5
-          // estado: true
-        },
-        {
-          nombre: "MICROPERFORADO",
-          precio: 3.1
-          //estado: true
-        },
-        {
-          nombre: "BANNER UV",
-          precio: 2.3
-          // estado: true
         }
-      ];
+      ];*/
+    },
+    GetCostos() {
+      api.getCostos().then(costos => (this.costos = costos));
+      //console.log(this.costos[0].nombre)
     },
 
     editItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
+      this.editedIndex = this.costos.indexOf(item);
       this.editedItem = Object.assign({}, item);
+      //console.log("edit " + this.editedItem.id);
       this.dialog = true;
     },
 
     deleteItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
+      this.editedIndex = this.costos.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialogDelete = true;
     },
 
     deleteItemConfirm() {
-      this.desserts.splice(this.editedIndex, 1);
+      this.costos.splice(this.editedIndex, 1);
       this.closeDelete();
     },
 
@@ -205,11 +195,24 @@ export default {
 
     save() {
       if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem);
+        //const formData = [];
+        //this.formData = this.editedItem;
+        //console.log(JSON.stringify(this.editedItem));
+        this.editedItem.accion = 2;
+        api
+          .UpdateCostos(JSON.stringify(this.editedItem))
+          .then(msg => (this.msg = msg));
+
+        // Object.assign(this.desserts[this.editedIndex], this.editedItem);
       } else {
-        this.desserts.push(this.editedItem);
+        this.editedItem.accion = 1;
+        api
+          .UpdateCostos(JSON.stringify(this.editedItem))
+          .then(msg => (this.msg = msg));
+        //this.costos.push(this.editedItem);
       }
       this.close();
+      //this.GetCostos();
     }
   }
 };
