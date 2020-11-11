@@ -1,5 +1,6 @@
 <template>
   <v-main>
+    <PxLateral />
     <v-data-table
       :headers="headers"
       :items="costos"
@@ -55,7 +56,7 @@
           <v-dialog v-model="dialogDelete" max-width="500px">
             <v-card>
               <v-card-title class="headline"
-                >Are you sure you want to delete this item?</v-card-title
+                >Esta seguro de eliminar este costo?</v-card-title
               >
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -89,8 +90,12 @@
 </template>
 
 <script>
+import PxLateral from "@/components/PxLateral";
 import api from "@/apis/api";
 export default {
+  components: {
+    PxLateral
+  },
   data: () => ({
     dialog: false,
     dialogDelete: false,
@@ -144,16 +149,7 @@ export default {
   },
 
   methods: {
-    initialize() {
-      /* this.costos = [
-        {
-          nombre: "VINIL LAMINADO MATE",
-          precio: 3.05,
-          id: 0
-          ///estado: true
-        }
-      ];*/
-    },
+    initialize() {},
     GetCostos() {
       api.getCostos().then(costos => (this.costos = costos));
       //console.log(this.costos[0].nombre)
@@ -173,7 +169,11 @@ export default {
     },
 
     deleteItemConfirm() {
-      this.costos.splice(this.editedIndex, 1);
+      //this.costos.splice(this.editedIndex, 1);
+      this.editedItem.accion = 3;
+      api
+        .UpdateCostos(JSON.stringify(this.editedItem))
+        .then(msg => (this.msg = msg));
       this.closeDelete();
     },
 
@@ -195,15 +195,10 @@ export default {
 
     save() {
       if (this.editedIndex > -1) {
-        //const formData = [];
-        //this.formData = this.editedItem;
-        //console.log(JSON.stringify(this.editedItem));
         this.editedItem.accion = 2;
         api
           .UpdateCostos(JSON.stringify(this.editedItem))
           .then(msg => (this.msg = msg));
-
-        // Object.assign(this.desserts[this.editedIndex], this.editedItem);
       } else {
         this.editedItem.accion = 1;
         api

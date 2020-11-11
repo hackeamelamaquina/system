@@ -1,6 +1,7 @@
 <template>
   <div>
     <v-main>
+      <PxLateral />
       <v-img
         lazy-src="@/assets/LogoG.jpg"
         max-height="950"
@@ -57,8 +58,12 @@
 </template>
 
 <script>
+import PxLateral from "@/components/PxLateral";
 export default {
   name: "home",
+  components: {
+    PxLateral
+  },
   // eslint-disable-next-line vue/no-unused-components
   //components: { PxMenu },
   data: () => ({

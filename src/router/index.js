@@ -1,12 +1,13 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Home from "@/views/Home.vue";
 import Error from "@/views/Error";
 import Mantenimiento from "@/views/Mantenimiento";
 import Costos from "@/views/Costos";
+import Login from "@/views/login";
 
-
-
+//import VeeValidate from "vee-validate";
+//Vue.use(VeeValidate);
 Vue.use(VueRouter);
 
 const routes = [
@@ -38,6 +39,11 @@ const routes = [
     path: "*",
     name: "error",
     component: Error
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: Login
   }
 ];
 
