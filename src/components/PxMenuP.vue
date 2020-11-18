@@ -40,11 +40,11 @@
             :key="grandchild.title"
             link
           >
-            <v-list-item-content>
+            <v-list-item-content v-on:click="push(grandchild.link)">
               <v-list-item-title v-text="grandchild.title"></v-list-item-title>
             </v-list-item-content>
             <v-list-item-icon>
-              <router-link :to="{ name: 'Costos' }">
+              <router-link to="/costos">
                 <v-icon :color="grandchild.color">
                   {{ grandchild.icon }}</v-icon
                 ></router-link
@@ -79,7 +79,7 @@ export default {
                   title: "Costos",
                   icon: "mdi-view-list-outline",
                   color: "yellow",
-                  link: "home"
+                  link: "costos"
                 }
               ]
             },
@@ -122,6 +122,11 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    push(url) {
+      this.$router.push("/" + url);
+    }
   }
 };
 </script>
