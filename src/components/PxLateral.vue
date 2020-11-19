@@ -3,11 +3,7 @@
     <v-system-bar app dark>
       <v-spacer></v-spacer>
 
-      <v-icon>mdi-square</v-icon>
-
-      <v-icon>mdi-circle</v-icon>
-
-      <v-icon>mdi-triangle</v-icon>
+      <v-icon v-on:click="logOut()">mdi-logout</v-icon>
     </v-system-bar>
 
     <v-navigation-drawer app dark>
@@ -23,9 +19,26 @@
   </div>
 </template>
 <script>
+import api from "@/apis/apiLogin";
 import PxMenu from "@/components/PxMenuP";
 export default {
   name: "PxLateral",
-  components: { PxMenu }
+  components: { PxMenu },
+  created() {
+    this.getToken();
+  },
+  methods: {    
+    logOut() {
+      api.deleteUserLogged();
+      this.$router.push("/login");
+    },
+    getToken(){
+      var token = api.getUserLogged();
+      console.log(token + " asdas")
+      if (token === undefined) {
+        this.$router.push("/login");
+      }
+    }
+  }
 };
 </script>

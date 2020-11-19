@@ -7,7 +7,7 @@
 <script>
 //import HelloWorld from "./components/HelloWorld";
 //import PxLateral from "@/components/PxLateral";
-
+//import api from "@/apis/apiLogin";
 export default {
   name: "App",
 
@@ -16,7 +16,15 @@ export default {
   },
 
   data: () => ({
+    tokenValido: false
     //
-  })
+  }),
+  created() {
+    //this.getToken();
+  },
+  mounted() {
+   // this.getToken();
+  },
+  methods:{}
 };
 </script>

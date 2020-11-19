@@ -91,7 +91,7 @@
 
 <script>
 import PxLateral from "@/components/PxLateral";
-import api from "@/apis/api";
+import api from "@/apis/apiCostos";
 export default {
   components: {
     PxLateral
@@ -145,13 +145,14 @@ export default {
     this.GetCostos();
   },
   updated() {
-    this.GetCostos();
+   // this.GetCostos();
   },
 
   methods: {
     initialize() {},
     GetCostos() {
       api.getCostos().then(costos => (this.costos = costos));
+
       //console.log(this.costos[0].nombre)
     },
 
@@ -203,7 +204,8 @@ export default {
         this.editedItem.accion = 1;
         api
           .UpdateCostos(JSON.stringify(this.editedItem))
-          .then(msg => (this.msg = msg));
+          .then(msg => (this.msg = msg))
+          .finally(() => this.GetCostos());
         //this.costos.push(this.editedItem);
       }
       this.close();

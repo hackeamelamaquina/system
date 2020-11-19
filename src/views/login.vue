@@ -6,8 +6,8 @@
           <v-card class="elevation-12" dark>
             <v-toolbar color="light-green darken-4">
               <v-avatar class="mb-4" color="grey darken-1" size="74">
-          <img src="@/assets/logo.jpg" alt="John"
-        /></v-avatar>
+                <img src="@/assets/logo.jpg" alt="John"
+              /></v-avatar>
               <v-toolbar-title>Multicreativa</v-toolbar-title>
               <v-spacer />
             </v-toolbar>
@@ -62,43 +62,64 @@
   </v-main>
 </template>
 <script>
+import api from "@/apis/apiLogin";
+
 export default {
-  data: () => ({
-    valid: true,
-    name: "",
-    nameRules: [
-      v => !!v || "Name is required",
-      v => (v && v.length <= 10) || "Name must be less than 10 characters"
-    ],
-    email: "",
-    emailRules: [
-      v => !!v || "E-mail is required",
-      v => /.+@.+\..+/.test(v) || "E-mail must be valid"
-    ],
-    select: null,
-    items: ["Item 1", "Item 2", "Item 3", "Item 4"],
-    checkbox: false,
-    username: "",
-    password: "",
-    errorMessages: "Incorrect login info",
-    snackbar: false,
-    color: "general",
-    showPassword: false
-  }),
+  data() {
+    return {
+      token: [],
+      valid: true,
+      name: "",
+      nameRules: [
+        v => !!v || "Name is required",
+        v => (v && v.length <= 10) || "Name must be less than 10 characters"
+      ],
+      //email: "",
+      // emailRules: [
+      //   v => !!v || "E-mail is required",
+      //  v => /.+@.+\..+/.test(v) || "E-mail must be valid"
+      //]//,
+      select: null,
+      //items: ["Item 1", "Item 2", "Item 3", "Item 4"],
+      checkbox: false,
+      username: "",
+      password: "",
+      errorMessages: "Incorrect login info",
+      snackbar: false,
+      color: "general",
+      showPassword: false
+    };
+  },
+  watch: {
+    updated() {
+      //console.log(this.tokens.length);
+    }
+  },
 
   methods: {
-    login: function() {
+    login() {
       let username = this.username;
       let password = this.password;
-      console.log(username);
-      console.log(password);
-      /*this.$store
-        .dispatch("login", { username, password })
-        .then(() => this.$router.push("/dashboard"))
-        .catch(err => {
-          console.log(err);
-          this.snackbar = true;
-        });*/
+      if (username.length > 0 && password.length > 0) {
+        api
+          .getToken(JSON.stringify({ usuario: username, psw: password }))
+         // .then(token => console.log(token[0]))
+          //.then(token => this.verifica(JSON.stringify(token)))
+          .then(token => (this.token = token[0]))
+          .catch(error => console.log(error))
+          .finally(() => this.verifica());
+      } else {
+        this.snackbar = true;
+      }
+    },
+    verifica() {
+      console.log(this.token);
+      if (this.token.token == 0) {
+        this.snackbar = true;
+      } else {
+        api.setUserLogged(this.token.token);
+        this.$router.push("/");
+      }
     },
     validate() {
       this.$refs.form.validate();
