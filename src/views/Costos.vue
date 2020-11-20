@@ -199,7 +199,8 @@ export default {
         this.editedItem.accion = 2;
         api
           .UpdateCostos(JSON.stringify(this.editedItem))
-          .then(msg => (this.msg = msg));
+          .then(msg => (this.msg = msg))
+          .finally(() => this.GetCostos());
       } else {
         this.editedItem.accion = 1;
         api
