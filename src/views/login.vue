@@ -113,11 +113,11 @@ export default {
       }
     },
     verifica() {
-      console.log(this.vtoken);
-      if (this.vtoken.token == 0 || this.token.vtoken.length < 10) {
+      console.log(this.token);
+      if (this.token.vtoken == 0 || this.token.vtoken.length < 10) {
         this.snackbar = true;
       } else {
-        api.setUserLogged(this.token.token);
+        api.setUserLogged(this.token.vtoken);
         this.$router.push("/");
       }
     },
