@@ -1,5 +1,6 @@
 import Cookies from "js-cookie";
-const url = "http://localhost:3051/";
+//const url = "http://localhost:3051/";
+const url = "https://multicreativa.herokuapp.com/";
 
 async function getToken(formData) {
   console.log("api " + formData);
