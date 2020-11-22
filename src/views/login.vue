@@ -114,7 +114,7 @@ export default {
     },
     verifica() {
       console.log(this.token);
-      if (this.token.token == 0) {
+      if (this.token.token == 0 || this.token.token.length < 10) {
         this.snackbar = true;
       } else {
         api.setUserLogged(this.token.token);
