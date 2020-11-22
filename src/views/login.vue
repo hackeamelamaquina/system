@@ -113,8 +113,8 @@ export default {
       }
     },
     verifica() {
-      console.log(this.token);
-      if (this.token.token == 0 || this.token.token.length < 10) {
+      console.log(this.vtoken);
+      if (this.vtoken.token == 0 || this.token.vtoken.length < 10) {
         this.snackbar = true;
       } else {
         api.setUserLogged(this.token.token);
