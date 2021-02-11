@@ -1,6 +1,6 @@
 //const url = "http://localhost:3051/";
 //const url = "https://multicreativa.herokuapp.com/";
-const url = "http://167.99.154.234:3051";
+const url = "http://167.99.154.234:3051/";
 
 async function getCostos() {
   return fetch(`${url}costos`).then(res => res.json());
